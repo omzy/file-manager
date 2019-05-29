@@ -59,7 +59,7 @@ class FileController extends Controller
     {
         $file = File::findOrFail($id);
 
-        $filePath = 'media/' . $file->name;
+        $filePath = $file->getFilePath();
 
         if (!Storage::exists($filePath)) {
             throw new FileNotFoundException();
@@ -78,7 +78,15 @@ class FileController extends Controller
     {
         $file = File::findOrFail($id);
 
-        $file->delete();
+        $filePath = $file->getFilePath();
+
+        if (!Storage::exists($filePath)) {
+            throw new FileNotFoundException();
+        }
+
+        if (Storage::delete($filePath)) {
+            $file->delete();
+        }
 
         return response()->json(null, 204);
     }

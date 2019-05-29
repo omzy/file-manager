@@ -36,6 +36,16 @@ class File extends Model
     }
 
     /**
+     * Return the storage file path.
+     *
+     * @return string
+     */
+    public function getFilePath()
+    {
+        return 'media/' . $this->name;
+    }
+
+    /**
      * Upload the file and save metadata to database.
      *
      * @return array
