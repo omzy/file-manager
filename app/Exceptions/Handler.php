@@ -10,6 +10,7 @@ use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Response;
 
 class Handler extends ExceptionHandler
@@ -56,6 +57,10 @@ class Handler extends ExceptionHandler
             elseif ($exception instanceof ModelNotFoundException) {
                 $status = Response::HTTP_NOT_FOUND;
                 $message = 'Resource not found';
+            }
+            elseif ($exception instanceof FileNotFoundException) {
+                $status = Response::HTTP_NOT_FOUND;
+                $message = 'The requested file was not found';
             }
             elseif ($exception instanceof MethodNotAllowedHttpException) {
                 $status = Response::HTTP_METHOD_NOT_ALLOWED;

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use App\Models\File;
 
 class FileController extends Controller
@@ -45,6 +47,25 @@ class FileController extends Controller
         $file = File::findOrFail($id);
 
         return response()->json($file, 200);
+    }
+
+    /**
+     * Download the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function download($id)
+    {
+        $file = File::findOrFail($id);
+
+        $filePath = 'media/' . $file->name;
+
+        if (!Storage::exists($filePath)) {
+            throw new FileNotFoundException();
+        }
+
+        return Storage::download($filePath, $file->name);
     }
 
     /**

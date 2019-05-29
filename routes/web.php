@@ -18,7 +18,7 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('files',  ['uses' => 'FileController@index']);
     $router->get('files/{id}', ['uses' => 'FileController@show']);
-    $router->get('files/{id}', ['uses' => 'FileController@download']);
+    $router->get('files/download/{id}', ['uses' => 'FileController@download']);
     $router->post('files', ['uses' => 'FileController@store']);
     $router->delete('files/{id}', ['uses' => 'FileController@delete']);
 });

@@ -43,18 +43,15 @@ class File extends Model
     public static function uploadAndSave($request)
     {
         $file = $request->file('file');
-        $name = $file->getClientOriginalName();
-        $type = $file->getClientOriginalExtension();
-        $size = $file->getClientSize();
 
         if ($file->isValid()) {
-            $file->move('media', $name);
-
-            return self::create([
-                'name' => $name,
-                'type' => $type,
-                'size' => $size,
-            ]);
+            if ($file->store('media')) {
+                return self::create([
+                    'name' => $file->hashName(),
+                    'type' => $file->extension(),
+                    'size' => $file->getSize(),
+                ]);
+            }
         }
     }
 }
