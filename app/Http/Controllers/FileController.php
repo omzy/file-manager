@@ -42,7 +42,7 @@ class FileController extends Controller
      */
     public function show($id)
     {
-        $file = File::find($id);
+        $file = File::findOrFail($id);
 
         return response()->json($file, 200);
     }
