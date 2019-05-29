@@ -14,3 +14,11 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('files',  ['uses' => 'FileController@index']);
+    $router->get('files/{id}', ['uses' => 'FileController@show']);
+    $router->get('files/{id}', ['uses' => 'FileController@download']);
+    $router->post('files', ['uses' => 'FileController@store']);
+    $router->delete('files/{id}', ['uses' => 'FileController@delete']);
+});
