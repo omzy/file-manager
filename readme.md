@@ -1,21 +1,25 @@
-# Lumen PHP Framework
+# File Manager Microservice
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+This is a simple Microservice built in [Lumen](https://lumen.laravel.com) micro framework.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Requirements
 
-## Official Documentation
+1. PHP `>= 7.1.3`
+2. MySQL `>= 5.6`
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+## Installation Instructions
 
-## Security Vulnerabilities
+1. Clone the repo (`git clone...`)
+2. Run `composer install` to install the application dependencies
+3. Create a copy of `.env.example` and save it as `.env`
+3. Create a database and enter the database credentials in the `.env` file
+3. Run `php artisan migrate` to create the database tables
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Available Endpoints
 
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- GET `/api/files` (get a list of all files)
+- GET `/api/files/{id}` (get a single file)
+- GET `/api/files/download/{id}` (download a file)
+- GET `/api/files/total` (get total used space)
+- POST `/api/files` (upload a file)
+- DELETE `/api/files/{id}` (delete a file)
