@@ -23,3 +23,7 @@ This is a simple Microservice built in [Lumen](https://lumen.laravel.com) micro 
 - GET `/api/files/total` (get total used space)
 - POST `/api/files` (upload a file)
 - DELETE `/api/files/{id}` (delete a file)
+
+## Testing
+
+- Run `phpunit` to run the unit tests
