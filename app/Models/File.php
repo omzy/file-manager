@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class File extends Model
@@ -43,6 +44,33 @@ class File extends Model
     public function getFilePath()
     {
         return 'media/' . $this->name;
+    }
+
+    /**
+     * Return total used storage space.
+     *
+     * @return string
+     */
+    public static function getTotalUsedSpace()
+    {
+        return DB::table('files')->sum('size');
+    }
+
+    /**
+     * Return formated total used storage space.
+     *
+     * @return array
+     */
+    public static function getFormattedTotalUsedSpace()
+    {
+        $divisor = 1024;
+
+        $bytes = self::getTotalUsedSpace();
+        $kilobytes = number_format($bytes / $divisor, 2);
+        $megabytes = number_format($kilobytes / $divisor, 2);
+        $gigabytes = number_format($megabytes / $divisor, 2);
+
+        return compact('bytes', 'kilobytes', 'megabytes', 'gigabytes');
     }
 
     /**

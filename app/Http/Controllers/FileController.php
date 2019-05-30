@@ -69,6 +69,18 @@ class FileController extends Controller
     }
 
     /**
+     * Return total used storage space.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function total()
+    {
+        $total = File::getFormattedTotalUsedSpace();
+
+        return response()->json($total, 200);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
